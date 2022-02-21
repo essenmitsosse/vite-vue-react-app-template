@@ -1,18 +1,8 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  width: 5vw;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo-react {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 @keyframes App-logo-spin {
   from {

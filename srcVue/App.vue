@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import ParentComponent from "./ParentComponent.vue";
+import { wrapper } from "../src/wrapper";
+
+const value = wrapper;
 </script>
 
 <template>
@@ -7,6 +10,7 @@ import ParentComponent from "./ParentComponent.vue";
     <header class="App-header">
       <img alt="Vue logo" src="./assets/logo.png" class="App-logo" />
     </header>
-    <ParentComponent />
+    {{ value }}
+    <ParentComponent :parent="value.parent" />
   </div>
 </template>

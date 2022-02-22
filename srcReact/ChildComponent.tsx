@@ -1,4 +1,6 @@
-const ChildComponent = () => {
-  return <h1>Fuzbuz</h1>;
+import { Child } from "../src/types";
+
+const ChildComponent = (props: { child: Child }) => {
+  return <div>{props.child.value}</div>;
 };
 export default ChildComponent;

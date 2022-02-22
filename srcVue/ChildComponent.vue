@@ -1,3 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { defineProps } from "vue";
+import { Child } from "../src/types";
 
-<template><h1>Foobar</h1></template>
+const props = defineProps<{ child: Child }>();
+</script>
+
+<template>
+  <div>{{ props.child.value }}</div>
+</template>

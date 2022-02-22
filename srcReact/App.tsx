@@ -1,6 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
 import ParentComponent from "./ParentComponent";
+import { wrapper } from "../src/wrapper";
+
+const value = wrapper;
 
 function App() {
   return (
@@ -8,7 +11,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo App-logo-react" alt="logo" />
       </header>
-      <ParentComponent />
+      {JSON.stringify(value)}
+      <ParentComponent parent={value.parent} />
     </div>
   );
 }

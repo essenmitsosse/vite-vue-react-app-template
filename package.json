@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint srcVue srcReact --fix"
+    "lint": "eslint srcVue srcReact src --fix"
   },
   "dependencies": {
     "@types/react": "^17.0.39",

@@ -12,6 +12,10 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 2022,
+    jsx: true,
+  },
+  settings: {
+    react: { version: "detect" },
   },
   overrides: [
     // This makes sure typescript rules are only used for typescript files

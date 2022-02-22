@@ -1,5 +1,5 @@
 export interface Child {
-  value: number;
+  value: string;
 }
 
 export interface Parent {

@@ -5,18 +5,18 @@ import { Parent } from "../src/types";
 import { addNewChildToParent } from "../src/helper";
 
 const emit = defineEmits<{
-  (event: "add", parent: Parent): void;
+  (event: "input", parent: Parent): void;
 }>();
 const props = defineProps<{ parent: Parent }>();
 const size = computed(() => props.parent.listChild.length);
-const add = () => {
-  emit("add", addNewChildToParent(props.parent));
+const onClickAdd = () => {
+  emit("input", addNewChildToParent(props.parent));
 };
 </script>
 
 <template>
   <div class="parent">
-    Anzahl: {{ size }} <button @click="add">+</button>
+    Anzahl: {{ size }} <button @click="onClickAdd">+</button>
     <ul>
       <li v-for="(child, index) in props.parent.listChild" :key="index">
         <ChildComponent :child="child" />

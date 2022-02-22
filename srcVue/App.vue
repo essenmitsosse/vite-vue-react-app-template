@@ -5,7 +5,7 @@ import { Parent } from "../src/types";
 import { shallowRef, readonly } from "vue";
 
 let value = shallowRef(wrapper);
-const onAdd = (parent: Parent) => {
+const onInput = (parent: Parent) => {
   value.value = { parent };
 };
 </script>
@@ -15,7 +15,7 @@ const onAdd = (parent: Parent) => {
     <header class="App-header">
       <img alt="Vue logo" src="./assets/logo.png" class="App-logo" />
     </header>
-    <ParentComponent :parent="readonly(value.parent)" @add="onAdd" />
+    <ParentComponent :parent="readonly(value.parent)" @input="onInput" />
     <pre>{{ value }}</pre>
   </div>
 </template>

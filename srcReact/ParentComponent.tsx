@@ -2,6 +2,7 @@ import { Parent } from "../src/types";
 import ChildComponent from "./ChildComponent";
 
 const ParentComponent = (props: { parent: Parent }) => {
+  const size = props.parent.listChild.length;
   return (
     <div
       style={{
@@ -11,6 +12,7 @@ const ParentComponent = (props: { parent: Parent }) => {
         background: "lightgrey",
       }}
     >
+      Anzahl: {size}
       <ul>
         {props.parent.listChild.map((child, index) => (
           <li key={index}>

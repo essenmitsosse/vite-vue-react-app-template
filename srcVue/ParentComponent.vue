@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
 import ChildComponent from "./ChildComponent.vue";
 import { Parent } from "../src/types";
 
 const props = defineProps<{ parent: Parent }>();
+const size = computed(() => props.parent.listChild.length);
 </script>
 
 <template>
@@ -15,6 +16,7 @@ const props = defineProps<{ parent: Parent }>();
       background: lightgrey;
     "
   >
+    Anzahl: {{ size }}
     <ul>
       <li v-for="(child, index) in props.parent.listChild" :key="index">
         <ChildComponent :child="child" />

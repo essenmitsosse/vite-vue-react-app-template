@@ -1,7 +1,7 @@
-import logo from './logo.svg'
-import './App.css'
+import logo from "./logo.svg";
+import "./App.css";
 
-const message = 'Hello World!';
+const message = "Hello World!";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <h1>{message}</h1>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

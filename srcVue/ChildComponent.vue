@@ -6,7 +6,7 @@ const props = defineProps<{ child: Child }>();
 </script>
 
 <template>
-  <div style="background: grey; margin-bottom: 0.5rem; padding: 0.25rem">
+  <div class="child">
     {{ props.child.value }}
   </div>
 </template>

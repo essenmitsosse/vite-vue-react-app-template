@@ -16,9 +16,7 @@ function App() {
         <img src={logo} className="App-logo App-logo-react" alt="logo" />
       </header>
       <ParentComponent parent={value.parent} setParent={setParent} />
-      <pre style={{ background: "lightgrey", padding: "1rem" }}>
-        {JSON.stringify(value, null, 2)}
-      </pre>
+      <pre className="pre">{JSON.stringify(value, null, 2)}</pre>
     </div>
   );
 }

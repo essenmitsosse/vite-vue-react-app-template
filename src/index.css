@@ -40,10 +40,32 @@ pre {
   padding: 1rem
 }
 
+.parent {
+  margin: 1rem;
+  padding: 1rem;
+  background: lightgray;
+}
+
+.child {
+  background: gray; 
+  margin-bottom: 0.5rem; 
+  padding: 0.25rem
+}
+
+
+
 @media (prefers-color-scheme: dark) {
   body {
     background: rgb(42, 40, 48);
     color: lightgray;
+  }
+
+  .parent {
+    background: rgb(55, 51, 67);
+  }
+
+  .child {
+    background: rgb(69, 63, 87);
   }
 
   input {

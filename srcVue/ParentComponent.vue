@@ -15,14 +15,7 @@ const add = () => {
 </script>
 
 <template>
-  <div
-    style="
-      border: 1px solid black;
-      margin: 1rem;
-      padding: 1rem;
-      background: lightgrey;
-    "
-  >
+  <div class="parent">
     Anzahl: {{ size }} <button @click="add">+</button>
     <ul>
       <li v-for="(child, index) in props.parent.listChild" :key="index">

@@ -9,14 +9,7 @@ const ParentComponent = (props: {
   const size = props.parent.listChild.length;
   const add = () => props.setParent(addNewChildToParent(props.parent));
   return (
-    <div
-      style={{
-        border: "1px solid black",
-        margin: "1rem",
-        padding: "1rem",
-        background: "lightgrey",
-      }}
-    >
+    <div className="parent">
       Anzahl: {size} <button onClick={add}>+</button>
       <ul>
         {props.parent.listChild.map((child, index) => (

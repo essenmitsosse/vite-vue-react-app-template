@@ -16,6 +16,6 @@ const onAdd = (parent: Parent) => {
       <img alt="Vue logo" src="./assets/logo.png" class="App-logo" />
     </header>
     <ParentComponent :parent="readonly(value.parent)" @add="onAdd" />
-    <pre style="background: lightgray; padding: 1rem">{{ value }}</pre>
+    <pre>{{ value }}</pre>
   </div>
 </template>

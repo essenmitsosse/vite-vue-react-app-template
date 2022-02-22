@@ -11,8 +11,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo App-logo-react" alt="logo" />
       </header>
-      {JSON.stringify(value)}
       <ParentComponent parent={value.parent} />
+      <pre style={{ background: "lightgrey", padding: "1rem" }}>
+        {JSON.stringify(value, null, 2)}
+      </pre>
     </div>
   );
 }

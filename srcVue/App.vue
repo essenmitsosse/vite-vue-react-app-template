@@ -10,7 +10,7 @@ const value = wrapper;
     <header class="App-header">
       <img alt="Vue logo" src="./assets/logo.png" class="App-logo" />
     </header>
-    {{ value }}
     <ParentComponent :parent="value.parent" />
+    <pre style="background: lightgray; padding: 1rem">{{ value }}</pre>
   </div>
 </template>

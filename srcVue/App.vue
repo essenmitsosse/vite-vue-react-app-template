@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import ParentComponent from "./ParentComponent.vue";
 import { wrapper } from "../src/wrapper";
+import { Parent } from "../src/types";
+import { shallowRef, readonly } from "vue";
 
-const value = wrapper;
+let value = shallowRef(wrapper);
+const onAdd = (parent: Parent) => {
+  value.value = { parent };
+};
 </script>
 
 <template>
@@ -10,7 +15,7 @@ const value = wrapper;
     <header class="App-header">
       <img alt="Vue logo" src="./assets/logo.png" class="App-logo" />
     </header>
-    <ParentComponent :parent="value.parent" />
+    <ParentComponent :parent="readonly(value.parent)" @add="onAdd" />
     <pre style="background: lightgray; padding: 1rem">{{ value }}</pre>
   </div>
 </template>

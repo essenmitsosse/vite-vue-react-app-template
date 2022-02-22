@@ -1,11 +1,11 @@
 export interface Child {
-  value: string;
+  readonly value: string;
 }
 
 export interface Parent {
-  listChild: ReadonlyArray<Child>;
+  readonly listChild: ReadonlyArray<Child>;
 }
 
 export interface Wrapper {
-  parent: Parent;
+  readonly parent: Parent;
 }

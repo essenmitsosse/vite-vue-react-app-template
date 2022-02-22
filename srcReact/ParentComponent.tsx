@@ -1,8 +1,13 @@
 import { Parent } from "../src/types";
 import ChildComponent from "./ChildComponent";
+import { addNewChildToParent } from "../src/helper";
 
-const ParentComponent = (props: { parent: Parent }) => {
+const ParentComponent = (props: {
+  parent: Parent;
+  setParent: (parent: Parent) => void;
+}) => {
   const size = props.parent.listChild.length;
+  const add = () => props.setParent(addNewChildToParent(props.parent));
   return (
     <div
       style={{
@@ -12,7 +17,7 @@ const ParentComponent = (props: { parent: Parent }) => {
         background: "lightgrey",
       }}
     >
-      Anzahl: {size}
+      Anzahl: {size} <button onClick={add}>+</button>
       <ul>
         {props.parent.listChild.map((child, index) => (
           <li key={index}>

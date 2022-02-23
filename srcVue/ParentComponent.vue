@@ -24,14 +24,38 @@ const onInputChild = (index: number, child: Child) =>
 <template>
   <div class="parent">
     Anzahl: {{ size }} <button @click="onClickAdd">+</button>
-    <ul>
-      <li v-for="(child, index) in props.parent.listChild" :key="index">
+    <TransitionGroup tag="ul" name="fade" class="container">
+      <li
+        v-for="(child, index) in props.parent.listChild"
+        :key="child.idUnique"
+      >
         <ChildComponent
           :child="child"
           @input="onInputChild(index, $event)"
           @remove="onClickRemove(index)"
         />
       </li>
-    </ul>
+    </TransitionGroup>
   </div>
 </template>
+
+<style scoped>
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. declare enter from and leave to state */
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.fade-leave-active {
+  position: absolute;
+}
+</style>

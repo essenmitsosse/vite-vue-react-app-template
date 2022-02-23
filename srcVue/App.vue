@@ -6,8 +6,9 @@ import { shallowRef, readonly } from "vue";
 import { updateParentOnWrapper } from "../src/helper";
 
 let wrapper = shallowRef(wrapperDefault);
+
 const onInput = (parent: Parent) => {
-  wrapper.value = updateParentOnWrapper(parent)(wrapper.value);
+  wrapper.value = updateParentOnWrapper(wrapper.value, parent);
 };
 </script>
 

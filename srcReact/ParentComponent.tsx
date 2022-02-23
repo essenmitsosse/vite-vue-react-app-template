@@ -1,35 +1,32 @@
-import { Child, Parent } from "../src/types";
+import { Parent } from "../src/types";
 import ChildComponent from "./ChildComponent";
 import {
   addNewChildToParent,
   removeChildAtIndexFromParent,
   replaceChildInListChildOnParent,
 } from "../src/helper";
+import { pipe } from "rambda";
 
 const ParentComponent = (props: {
   parent: Parent;
   setParent: (parent: Parent) => void;
 }) => {
   const size = props.parent.listChild.length;
-  const onClickAdd = () => props.setParent(addNewChildToParent(props.parent));
-  const setChild = (index: number) => (child: Child) =>
-    props.setParent(
-      replaceChildInListChildOnParent(props.parent)(index)(child)
-    );
-  const getOnRemove = (index: number) => () => {
-    props.setParent(removeChildAtIndexFromParent(index)(props.parent));
-  };
+
+  const onClickAdd = pipe(addNewChildToParent, props.setParent);
+  const setChild = pipe(replaceChildInListChildOnParent, props.setParent);
+  const getOnRemove = pipe(removeChildAtIndexFromParent, props.setParent);
 
   return (
     <div className="parent">
-      Anzahl: {size} <button onClick={onClickAdd}>+</button>
+      Anzahl: {size} <button onClick={() => onClickAdd(props.parent)}>+</button>
       <ul>
         {props.parent.listChild.map((child, index) => (
           <li key={child.idUnique}>
             <ChildComponent
               child={child}
-              setChild={setChild(index)}
-              onRemove={getOnRemove(index)}
+              setChild={(child) => setChild(props.parent, index, child)}
+              onRemove={() => getOnRemove(props.parent, index)}
             />
           </li>
         ))}

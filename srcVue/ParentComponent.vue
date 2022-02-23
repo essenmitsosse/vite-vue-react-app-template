@@ -1,38 +1,34 @@
 <script setup lang="ts">
 import { computed, defineProps, defineEmits } from "vue";
 import ChildComponent from "./ChildComponent.vue";
-import { Child, Parent } from "../src/types";
+import { Parent } from "../src/types";
 import {
   addNewChildToParent,
   removeChildAtIndexFromParent,
   replaceChildInListChildOnParent,
 } from "../src/helper";
+import { pipe } from "rambda";
 
 const emit = defineEmits<{ (event: "input", parent: Parent): void }>();
 const props = defineProps<{ parent: Parent }>();
 const size = computed(() => props.parent.listChild.length);
-const onClickAdd = () => {
-  emit("input", addNewChildToParent(props.parent));
-};
-const onClickRemove = (index: number) => {
-  emit("input", removeChildAtIndexFromParent(index)(props.parent));
-};
-const onInputChild = (index: number, child: Child) =>
-  emit("input", replaceChildInListChildOnParent(props.parent)(index)(child));
+
+const emitCurry = (parent: Parent) => emit("input", parent);
+
+const onClickAdd = pipe(addNewChildToParent, emitCurry);
+const onClickRemove = pipe(removeChildAtIndexFromParent, emitCurry);
+const onInputChild = pipe(replaceChildInListChildOnParent, emitCurry);
 </script>
 
 <template>
   <div class="parent">
-    Anzahl: {{ size }} <button @click="onClickAdd">+</button>
+    Anzahl: {{ size }} <button @click="onClickAdd(parent)">+</button>
     <TransitionGroup tag="ul" name="fade" class="container">
-      <li
-        v-for="(child, index) in props.parent.listChild"
-        :key="child.idUnique"
-      >
+      <li v-for="(child, index) in parent.listChild" :key="child.idUnique">
         <ChildComponent
           :child="child"
-          @input="onInputChild(index, $event)"
-          @remove="onClickRemove(index)"
+          @input="onInputChild(parent, index, $event)"
+          @remove="onClickRemove(parent, index)"
         />
       </li>
     </TransitionGroup>

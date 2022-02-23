@@ -24,22 +24,22 @@ const removeElementFromList = <T>(
   list: ReadonlyArray<T>
 ): ReadonlyArray<T> => list.filter((_, index) => index !== indexToRemove);
 
-export const updateParentOnWrapper =
-  (parent: Parent) => (wrapper: Wrapper) => ({
-    ...wrapper,
+export const updateParentOnWrapper = (wrapper: Wrapper, parent: Parent) => ({
+  ...wrapper,
+  parent,
+});
+
+export const replaceChildInListChildOnParent = (
+  parent: Parent,
+  index: number,
+  childNew: Child
+): Parent =>
+  updateListChildOnParent(
     parent,
-  });
+    updateListChild(parent.listChild, index, childNew)
+  );
 
-export const replaceChildInListChildOnParent =
-  (parent: Parent) =>
-  (index: number) =>
-  (childNew: Child): Parent =>
-    updateListChildOnParent(
-      parent,
-      updateListChild(parent.listChild, index, childNew)
-    );
-
-export const updateValueOnChild = (value: string) => (child: Child) => ({
+export const updateValueOnChild = (child: Child, value: string) => ({
   ...child,
   value,
 });
@@ -54,10 +54,11 @@ export const addNewChildToParent = (parent: Parent): Parent =>
     }),
   ]);
 
-export const removeChildAtIndexFromParent =
-  (index: number) =>
-  (parent: Parent): Parent =>
-    updateListChildOnParent(
-      parent,
-      removeElementFromList(index, parent.listChild)
-    );
+export const removeChildAtIndexFromParent = (
+  parent: Parent,
+  index: number
+): Parent =>
+  updateListChildOnParent(
+    parent,
+    removeElementFromList(index, parent.listChild)
+  );

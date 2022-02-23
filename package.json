@@ -31,6 +31,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-vue": "^8.4.1",
     "prettier": "^2.5.1",
+    "rambda": "^7.0.3",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
     "vue-tsc": "^0.29.8"

@@ -1,3 +1,4 @@
+import { makeUnique } from "./helperIdUnique";
 import { Child, Parent, Wrapper } from "./types";
 
 const updateListChildOnParent = (
@@ -41,9 +42,9 @@ export const updateValueOnChild = (value: string) => (child: Child) => ({
 export const addNewChildToParent = (parent: Parent): Parent =>
   updateListChildOnParent(parent, [
     ...parent.listChild,
-    {
+    makeUnique({
       value: String.fromCharCode(
         parent.listChild.length + 65
       ).toLocaleLowerCase(),
-    },
+    }),
   ]);

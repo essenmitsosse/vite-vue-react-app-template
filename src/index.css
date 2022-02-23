@@ -29,7 +29,30 @@ body {
   pointer-events: none;
 }
 
-code {
+code, pre {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  background: lightblue;
+  color: darkslategray;
+}
+
+pre {
+  padding: 1rem
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgb(42, 40, 48);
+    color: lightgray;
+  }
+
+  input {
+    background: rgb(95, 90, 107);
+    color: white;
+  }
+
+  code, pre {
+    background: rgb(64, 97, 93);
+    color: rgb(153, 184, 180)
+  }
 }

@@ -7,28 +7,28 @@ import {
   removeChildAtIndexFromParent,
   replaceChildInListChildOnParent,
 } from "../src/helper";
-import { pipe } from "rambda";
+import { getGetEmitVue } from "./getGetEmit";
 
 const emit = defineEmits<{ (event: "input", parent: Parent): void }>();
 const props = defineProps<{ parent: Parent }>();
 const size = computed(() => props.parent.listChild.length);
 
-const emitCurry = (parent: Parent) => emit("input", parent);
+const getEmit = getGetEmitVue(emit, () => props.parent);
 
-const onClickAdd = pipe(addNewChildToParent, emitCurry);
-const onClickRemove = pipe(removeChildAtIndexFromParent, emitCurry);
-const onInputChild = pipe(replaceChildInListChildOnParent, emitCurry);
+const onClickAdd = getEmit(addNewChildToParent);
+const onClickRemove = getEmit(removeChildAtIndexFromParent);
+const onInputChild = getEmit(replaceChildInListChildOnParent);
 </script>
 
 <template>
   <div class="parent">
-    Anzahl: {{ size }} <button @click="onClickAdd(parent)">+</button>
+    Anzahl: {{ size }} <button @click="onClickAdd()">+</button>
     <TransitionGroup tag="ul" name="fade" class="container">
       <li v-for="(child, index) in parent.listChild" :key="child.idUnique">
         <ChildComponent
           :child="child"
-          @input="onInputChild(parent, index, $event)"
-          @remove="onClickRemove(parent, index)"
+          @input="onInputChild(index, $event)"
+          @remove="onClickRemove(index)"
         />
       </li>
     </TransitionGroup>

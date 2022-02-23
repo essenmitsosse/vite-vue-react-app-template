@@ -2,16 +2,15 @@
 import { defineProps, defineEmits } from "vue";
 import { Child } from "../src/types";
 import { updateValueOnChild } from "../src/helper";
-import { pipe } from "rambda";
+import { getGetEmitVue } from "./getGetEmit";
 
 const emit = defineEmits<{
   (event: "input", child: Child): void;
   (event: "remove"): void;
 }>();
-defineProps<{ child: Child }>();
-const emitCurry = (child: Child) => emit("input", child);
-
-const onInput = pipe(updateValueOnChild, emitCurry);
+const props = defineProps<{ child: Child }>();
+const getEmit = getGetEmitVue(emit, () => props.child);
+const onInput = getEmit(updateValueOnChild);
 </script>
 
 <template>
@@ -19,7 +18,7 @@ const onInput = pipe(updateValueOnChild, emitCurry);
     <input
       type="text"
       :value="child.value"
-      @input="onInput(child, ($event.currentTarget as HTMLInputElement).value)"
+      @input="onInput(($event.currentTarget as HTMLInputElement).value)"
     />
     <button @click="emit('remove')">-</button>
   </div>

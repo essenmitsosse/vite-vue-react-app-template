@@ -1,19 +1,20 @@
 import { Child } from "../src/types";
 import { updateValueOnChild } from "../src/helper";
-import { pipe } from "rambda";
+import { getGetEmit } from "../src/getGetEmit";
 
 const ChildComponent = (props: {
   child: Child;
   setChild: (child: Child) => void;
   onRemove: () => void;
 }) => {
-  const onInput = pipe(updateValueOnChild, props.setChild);
+  const getEmit = getGetEmit(props.setChild, () => props.child);
+  const onInput = getEmit(updateValueOnChild);
   return (
     <div className="child">
       <input
         defaultValue={props.child.value}
         type="text"
-        onInput={(event) => onInput(props.child, event.currentTarget.value)}
+        onInput={(event) => onInput(event.currentTarget.value)}
       />
       <button onClick={props.onRemove}>-</button>
     </div>

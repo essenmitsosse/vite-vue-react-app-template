@@ -24,7 +24,10 @@ const removeElementFromList = <T>(
   list: ReadonlyArray<T>
 ): ReadonlyArray<T> => list.filter((_, index) => index !== indexToRemove);
 
-export const updateParentOnWrapper = (wrapper: Wrapper, parent: Parent) => ({
+export const updateParentOnWrapper = (
+  wrapper: Wrapper,
+  parent: Parent
+): Wrapper => ({
   ...wrapper,
   parent,
 });

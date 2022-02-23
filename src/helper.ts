@@ -19,6 +19,11 @@ const updateListChild = (
   return listChildNew;
 };
 
+const removeElementFromList = <T>(
+  indexToRemove: number,
+  list: ReadonlyArray<T>
+): ReadonlyArray<T> => list.filter((_, index) => index !== indexToRemove);
+
 export const updateParentOnWrapper =
   (parent: Parent) => (wrapper: Wrapper) => ({
     ...wrapper,
@@ -48,3 +53,11 @@ export const addNewChildToParent = (parent: Parent): Parent =>
       ).toLocaleLowerCase(),
     }),
   ]);
+
+export const removeChildAtIndexFromParent =
+  (index: number) =>
+  (parent: Parent): Parent =>
+    updateListChildOnParent(
+      parent,
+      removeElementFromList(index, parent.listChild)
+    );

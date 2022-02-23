@@ -3,7 +3,10 @@ import { defineProps, defineEmits } from "vue";
 import { Child } from "../src/types";
 import { updateValueOnChild } from "../src/helper";
 
-const emit = defineEmits<{ (event: "input", child: Child): void }>();
+const emit = defineEmits<{
+  (event: "input", child: Child): void;
+  (event: "remove"): void;
+}>();
 const props = defineProps<{ child: Child }>();
 const onInput = (event: Event) =>
   emit(
@@ -17,5 +20,6 @@ const onInput = (event: Event) =>
 <template>
   <div class="child">
     <input type="text" :value="props.child.value" @input="onInput" />
+    <button @click="emit('remove')">-</button>
   </div>
 </template>

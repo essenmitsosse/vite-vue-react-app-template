@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
 import { Child } from "../src/types";
+import { updateValueOnChild } from "../src/helper";
 
 const emit = defineEmits<{ (event: "input", child: Child): void }>();
 const props = defineProps<{ child: Child }>();
 const onInput = (event: Event) =>
-  emit("input", { value: (event.currentTarget as HTMLInputElement).value });
+  emit(
+    "input",
+    updateValueOnChild((event.currentTarget as HTMLInputElement).value)(
+      props.child
+    )
+  );
 </script>
 
 <template>

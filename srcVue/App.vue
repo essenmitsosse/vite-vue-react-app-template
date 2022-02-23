@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import ParentComponent from "./ParentComponent.vue";
-import { wrapper } from "../src/wrapper";
+import { wrapperDefault } from "../src/wrapper";
 import { Parent } from "../src/types";
 import { shallowRef, readonly } from "vue";
+import { updateParentOnWrapper } from "../src/helper";
 
-let value = shallowRef(wrapper);
+let wrapper = shallowRef(wrapperDefault);
 const onInput = (parent: Parent) => {
-  value.value = { parent };
+  wrapper.value = updateParentOnWrapper(parent)(wrapper.value);
 };
 </script>
 
@@ -15,7 +16,7 @@ const onInput = (parent: Parent) => {
     <header class="App-header">
       <img alt="Vue logo" src="./assets/logo.png" class="App-logo" />
     </header>
-    <ParentComponent :parent="readonly(value.parent)" @input="onInput" />
-    <pre>{{ value }}</pre>
+    <ParentComponent :parent="readonly(wrapper.parent)" @input="onInput" />
+    <pre>{{ wrapper }}</pre>
   </div>
 </template>

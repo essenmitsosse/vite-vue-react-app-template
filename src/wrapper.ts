@@ -1,5 +1,5 @@
 import { Wrapper } from "./types";
 
-export const wrapper: Wrapper = {
+export const wrapperDefault: Wrapper = {
   parent: { listChild: [{ value: "a" }, { value: "b" }] },
 };

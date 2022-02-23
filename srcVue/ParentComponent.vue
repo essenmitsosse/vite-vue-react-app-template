@@ -2,7 +2,10 @@
 import { computed, defineProps, defineEmits } from "vue";
 import ChildComponent from "./ChildComponent.vue";
 import { Child, Parent } from "../src/types";
-import { addNewChildToParent, updateListChildOnParent } from "../src/helper";
+import {
+  addNewChildToParent,
+  replaceChildInListChildOnParent,
+} from "../src/helper";
 
 const emit = defineEmits<{ (event: "input", parent: Parent): void }>();
 const props = defineProps<{ parent: Parent }>();
@@ -11,7 +14,7 @@ const onClickAdd = () => {
   emit("input", addNewChildToParent(props.parent));
 };
 const onInputChild = (index: number, child: Child) =>
-  emit("input", updateListChildOnParent(props.parent)(index)(child));
+  emit("input", replaceChildInListChildOnParent(props.parent)(index)(child));
 </script>
 
 <template>

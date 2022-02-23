@@ -1,22 +1,12 @@
-import { Child, Parent } from "./types";
+import { Child, Parent, Wrapper } from "./types";
 
-const replaceListChildOnParent = (
+const updateListChildOnParent = (
   parent: Parent,
   listChild: ReadonlyArray<Child>
 ): Parent => ({
   ...parent,
   listChild,
 });
-
-export const addNewChildToParent = (parent: Parent): Parent =>
-  replaceListChildOnParent(parent, [
-    ...parent.listChild,
-    {
-      value: String.fromCharCode(
-        parent.listChild.length + 65
-      ).toLocaleLowerCase(),
-    },
-  ]);
 
 const updateListChild = (
   listChild: ReadonlyArray<Child>,
@@ -28,11 +18,32 @@ const updateListChild = (
   return listChildNew;
 };
 
-export const updateListChildOnParent =
+export const updateParentOnWrapper =
+  (parent: Parent) => (wrapper: Wrapper) => ({
+    ...wrapper,
+    parent,
+  });
+
+export const replaceChildInListChildOnParent =
   (parent: Parent) =>
   (index: number) =>
   (childNew: Child): Parent =>
-    replaceListChildOnParent(
+    updateListChildOnParent(
       parent,
       updateListChild(parent.listChild, index, childNew)
     );
+
+export const updateValueOnChild = (value: string) => (child: Child) => ({
+  ...child,
+  value,
+});
+
+export const addNewChildToParent = (parent: Parent): Parent =>
+  updateListChildOnParent(parent, [
+    ...parent.listChild,
+    {
+      value: String.fromCharCode(
+        parent.listChild.length + 65
+      ).toLocaleLowerCase(),
+    },
+  ]);

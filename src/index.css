@@ -52,7 +52,10 @@ pre {
   padding: 0.25rem
 }
 
-
+button {
+  border: none;
+  border-radius: 4px;
+}
 
 @media (prefers-color-scheme: dark) {
   body {
@@ -76,5 +79,10 @@ pre {
   code, pre {
     background: rgb(64, 97, 93);
     color: rgb(153, 184, 180)
+  }
+
+  button {
+    background: rgb(23, 20, 33);
+    color: white;
   }
 }
